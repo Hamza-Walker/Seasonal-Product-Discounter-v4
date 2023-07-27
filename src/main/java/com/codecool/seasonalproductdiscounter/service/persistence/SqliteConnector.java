@@ -17,12 +17,13 @@ public class SqliteConnector {
 
     public Connection getConnection() {
         Connection conn;
+        /*
         try {
             // Complete the method
 
-        } catch (SQLException e) {
+       } catch (SQLException e) {
             System.out.println(e.getMessage());
-        }
+        }*/
 
         return null;
     }
