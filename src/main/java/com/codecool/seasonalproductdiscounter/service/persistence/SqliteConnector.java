@@ -3,6 +3,7 @@ package com.codecool.seasonalproductdiscounter.service.persistence;
 import com.codecool.seasonalproductdiscounter.service.logger.Logger;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class SqliteConnector {
@@ -17,13 +18,20 @@ public class SqliteConnector {
 
     public Connection getConnection() {
         Connection conn;
-        /*
         try {
-            // Complete the method
+            // Load the SQLite JDBC driver
+            Class.forName("org.sqlite.JDBC");
 
-       } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }*/
+            // Create a connection to the database
+            conn = DriverManager.getConnection("jdbc:sqlite:" + dbFile);
+
+            logger.logInfo("Connected to SQLite database: " + dbFile);
+        } catch (ClassNotFoundException e) {
+            logger.logError("SQLite JDBC driver not found.");
+        } catch (SQLException e) {
+            logger.logError("Error connecting to SQLite database: " + e.getMessage());
+        }
+
 
         return null;
     }

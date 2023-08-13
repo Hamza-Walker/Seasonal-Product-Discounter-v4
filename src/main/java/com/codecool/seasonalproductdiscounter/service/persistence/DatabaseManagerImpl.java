@@ -12,9 +12,20 @@ public class DatabaseManagerImpl implements DatabaseManager {
     public static final String USERS_TABLE_NAME = "users";
     public static final String TRANSACTIONS_TABLE_NAME = "transactions";
 
-    private static final String PRODUCTS_TABLE_STATEMENT = "";
+    private static final String PRODUCTS_TABLE_STATEMENT =
+            String.format("CREATE TABLE IF NOT EXISTS %s (" +
+            "id INTEGER PRIMARY KEY, " +
+            "name TEXT NOT NULL, " +
+            "description TEXT, " +
+            "price REAL NOT NULL);",
+    PRODUCTS_TABLE_NAME);
 
-    private static final String USERS_TABLE_STATEMENT ="";
+    private static final String USERS_TABLE_STATEMENT =
+            String.format("CREATE TABLE IF NOT EXISTS %s (" +
+                            "id INTEGER PRIMARY KEY, " +
+                            "username TEXT NOT NULL UNIQUE, " +
+                            "email TEXT NOT NULL UNIQUE);",
+                    USERS_TABLE_NAME);
 
     private static final String TRANSACTIONS_TABLE_STATEMENT =
             String.format("CREATE TABLE IF NOT EXISTS %s (" +
@@ -41,13 +52,31 @@ public class DatabaseManagerImpl implements DatabaseManager {
     }
 
     private boolean executeQueries(Iterable<String> queries) {
-       /* try {
-            //Complete the method
+        Connection connection = sqliteConnector.getConnection();
+
+        if (connection == null) {
+            logger.logError("Failed to obtain a database connection.");
+            return false;
+        }
+
+        try {
+            Statement statement = connection.createStatement();
+
+            for (String query : queries) {
+                statement.executeUpdate(query);
+            }
+
+            statement.close();
+            connection.close();
+
+            logger.logInfo("Tables created successfully.");
+            return true;
         } catch (SQLException e) {
             logger.logError(e.getMessage());
             return false;
-        }*/
-
-        return true;
+        }
     }
+
+
+
 }
