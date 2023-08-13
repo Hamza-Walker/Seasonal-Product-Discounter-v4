@@ -47,7 +47,7 @@ public class Application {
         TransactionsSimulator simulator = new TransactionsSimulator(logger, userRepository, productRepository,
                 authenticationService, discounterService, transactionRepository);
 
-        //RunSimulation(simulator, productRepository, transactionRepository);
+        // RunSimulation(simulator, productRepository, transactionRepository);
 
         System.out.println("Press any key to exit.");
         Scanner scanner = new Scanner(System.in);

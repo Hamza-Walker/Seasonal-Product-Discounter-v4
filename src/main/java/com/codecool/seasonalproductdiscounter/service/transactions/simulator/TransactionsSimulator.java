@@ -19,12 +19,12 @@ import java.util.Random;
 public class TransactionsSimulator {
     private static final Random RANDOM = new Random();
 
-    private Logger logger;
-    private UserRepository userRepository;
-    private ProductRepository productRepository;
-    private AuthenticationService authenticationService;
-    private DiscountService discounterService;
-    private TransactionRepository transactionRepository;
+    private final Logger logger;
+    private final UserRepository userRepository;
+    private final ProductRepository productRepository;
+    private final AuthenticationService authenticationService;
+    private final DiscountService discounterService;
+    private final TransactionRepository transactionRepository;
 
     public TransactionsSimulator(Logger logger, UserRepository userRepository,
                                  ProductRepository productRepository, AuthenticationService authenticationService,
